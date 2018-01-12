@@ -10,9 +10,7 @@ async function run() {
       });
 
       const page = await browser.newPage();
-      const listOfUsers = [];//Contains de list of users extract         
-
-      
+      const listOfUsers = [];//Contains de list of users extract
       
       const userToSearch = 'jhon'; //Params of search 
       const searchUrl = `https://github.com/search?q=${userToSearch}&type=Users&utf8=%E2%9C%93`;//Link will search in github
@@ -25,8 +23,7 @@ async function run() {
       //////////////////////////////
       const NUMBER_OF_USERS = "user-list-item";
       const USER_NODO = "#user_search_results > div.user-list > div:nth-child($index) > div.d-flex > div > a";  
-      const USERNAME_NODO = "#user_search_results > div.user-list > div:nth-child($index) > div.d-flex > div > span";
-      
+      const USERNAME_NODO = "#user_search_results > div.user-list > div:nth-child($index) > div.d-flex > div > span";      
 
       const numPages = await getNumPages(page);//Call the funcion wich provide de number of pages 
       
@@ -36,8 +33,9 @@ async function run() {
 
         let listInSearch = await page.evaluate((sel)=>{
             return  document.getElementsByClassName(sel).length; //return the length of the list what contains de users
-        },NUMBER_OF_USERS);        
-        for(let l = 1; l<listInSearch;l++){
+        },NUMBER_OF_USERS);
+          
+        for(let l = 1; l <= listInSearch; l++){
             
             let USER_CHILD = USER_NODO.replace("$index",l);//change the number of the child  
             let USERNAME_CHILD = USERNAME_NODO.replace("$index",l);//change the number of the child  
